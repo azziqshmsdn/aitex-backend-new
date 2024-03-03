@@ -22,10 +22,20 @@ export async function WITAFormSubmit(req: any, res: any) {
          // Check if the email was sent successfully
          if (sendMailToMarketing && sendMailToUser) {
             // Return a success response
-            return createResponse("Email sent successfully.", 200, { resultData: req.email }, null);
+            return createResponse(
+                "Email sent successfully.", 
+                200, 
+                { resultData: req.email }, 
+                null
+                );
         } else {
             // Return an error response
-            return createResponse("Error sending email.", 500, null, "Email not sent successfully.");
+            return createResponse(
+                "Error sending email.", 
+                500, 
+                null, 
+                "Email not sent successfully."
+                );
         }
         
     }
