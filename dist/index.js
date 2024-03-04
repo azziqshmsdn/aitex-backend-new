@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WITAFormSubmit_func = exports.home_func = void 0;
+exports.visitorFormSubmit_func = exports.exhibitorFormSubmit_func = exports.conferenceFormSubmit_func = exports.WITAFormSubmit_func = exports.home_func = void 0;
 const index_1 = require("./functions/index");
 const util_1 = require("./common/util");
 function returnBadRequest() {
@@ -35,4 +35,43 @@ function WITAFormSubmit_func(req, res) {
     });
 }
 exports.WITAFormSubmit_func = WITAFormSubmit_func;
+function conferenceFormSubmit_func(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        //validate request
+        if (!req) {
+            const badReq = returnBadRequest();
+            return res.status(badReq.StatusCode).json(badReq);
+        }
+        const payload = req.body;
+        const result = yield (0, index_1.conferenceFormSubmit)(payload, res);
+        return res.status(200).send(result);
+    });
+}
+exports.conferenceFormSubmit_func = conferenceFormSubmit_func;
+function exhibitorFormSubmit_func(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        //validate request
+        if (!req) {
+            const badReq = returnBadRequest();
+            return res.status(badReq.StatusCode).json(badReq);
+        }
+        const payload = req.body;
+        const result = yield (0, index_1.exhibitorFormSubmit)(payload, res);
+        return res.status(200).send(result);
+    });
+}
+exports.exhibitorFormSubmit_func = exhibitorFormSubmit_func;
+function visitorFormSubmit_func(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        //validate request
+        if (!req) {
+            const badReq = returnBadRequest();
+            return res.status(badReq.StatusCode).json(badReq);
+        }
+        const payload = req.body;
+        const result = yield (0, index_1.visitorFormSubmit)(payload, res);
+        return res.status(200).send(result);
+    });
+}
+exports.visitorFormSubmit_func = visitorFormSubmit_func;
 //# sourceMappingURL=index.js.map
