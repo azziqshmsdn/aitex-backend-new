@@ -30,6 +30,7 @@ function default_1(app) {
     app.post('/conferenceFormSubmit', Functions.conferenceFormSubmit_func);
     app.post('/exhibitorFormSubmit', Functions.exhibitorFormSubmit_func);
     app.post('/visitorFormSubmit', Functions.visitorFormSubmit_func);
+    app.post('/exhibitorFinalFormSubmit', Functions.exhibitorFinalFormSubmit_func);
 }
 exports.default = default_1;
 //# sourceMappingURL=routes.js.map

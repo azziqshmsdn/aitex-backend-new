@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.visitorFormSubmit_func = exports.exhibitorFormSubmit_func = exports.conferenceFormSubmit_func = exports.WITAFormSubmit_func = exports.home_func = void 0;
+exports.exhibitorFinalFormSubmit_func = exports.visitorFormSubmit_func = exports.exhibitorFormSubmit_func = exports.conferenceFormSubmit_func = exports.WITAFormSubmit_func = exports.home_func = void 0;
 const index_1 = require("./functions/index");
 const util_1 = require("./common/util");
 function returnBadRequest() {
@@ -74,4 +74,17 @@ function visitorFormSubmit_func(req, res) {
     });
 }
 exports.visitorFormSubmit_func = visitorFormSubmit_func;
+function exhibitorFinalFormSubmit_func(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        //validate request
+        if (!req) {
+            const badReq = returnBadRequest();
+            return res.status(badReq.StatusCode).json(badReq);
+        }
+        const payload = req.body;
+        const result = yield (0, index_1.exhibitorFinalFormSubmit)(payload, res);
+        return res.status(200).send(result);
+    });
+}
+exports.exhibitorFinalFormSubmit_func = exhibitorFinalFormSubmit_func;
 //# sourceMappingURL=index.js.map

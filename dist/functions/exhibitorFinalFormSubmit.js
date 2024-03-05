@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.exhibitorFormSubmit = void 0;
+exports.exhibitorFinalFormSubmit = void 0;
 const sendMail_1 = require("../common/sendMail");
 const util_1 = require("../common/util");
-function exhibitorFormSubmit(req, res) {
+function exhibitorFinalFormSubmit(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const mandatoryFields = [
             req.email
@@ -26,10 +26,9 @@ function exhibitorFormSubmit(req, res) {
             };
         }
         try {
-            const sendMailToMarketing = yield (0, sendMail_1.exhibitorFormSendMailToMarketing)(req);
-            const sendMailToUser = yield (0, sendMail_1.exhibitorFormSendMailToUser)(req);
+            const sendMailToMarketing = yield (0, sendMail_1.exhibitorFinalFormSendMailToMarketing)(req);
             // Check if the email was sent successfully
-            if (sendMailToMarketing && sendMailToUser) {
+            if (sendMailToMarketing) {
                 // Return a success response
                 return (0, util_1.createResponse)("Email sent successfully.", 200, { resultData: req.formData }, "Email sent successfully.");
             }
@@ -44,5 +43,5 @@ function exhibitorFormSubmit(req, res) {
         }
     });
 }
-exports.exhibitorFormSubmit = exhibitorFormSubmit;
-//# sourceMappingURL=exhibitorFormSubmit.js.map
+exports.exhibitorFinalFormSubmit = exhibitorFinalFormSubmit;
+//# sourceMappingURL=exhibitorFinalFormSubmit.js.map

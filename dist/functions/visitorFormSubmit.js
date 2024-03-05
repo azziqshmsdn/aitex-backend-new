@@ -31,11 +31,11 @@ function visitorFormSubmit(req, res) {
             // Check if the email was sent successfully
             if (sendMailToMarketing && sendMailToUser) {
                 // Return a success response
-                return (0, util_1.createResponse)("Email sent successfully.", 200, { resultData: req.email }, null);
+                return (0, util_1.createResponse)("Email sent successfully.", 200, { resultData: req.formData }, "Email sent successfully.");
             }
             else {
                 // Return an error response
-                return (0, util_1.createResponse)("Error sending email.", 500, null, "Email not sent successfully.");
+                return (0, util_1.createResponse)("Error sending email.", 500, { resultData: req.formData }, "Email not sent successfully.");
             }
         }
         catch (error) {

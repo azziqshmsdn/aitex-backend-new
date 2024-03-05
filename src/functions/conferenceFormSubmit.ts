@@ -25,15 +25,15 @@ export async function conferenceFormSubmit(req: any, res: any) {
             return createResponse(
                 "Email sent successfully.", 
                 200, 
-                { resultData: req.email }, 
-                null
+                { resultData: req.formData }, 
+                "Email sent successfully."
                 );
         } else {
             // Return an error response
             return createResponse(
                 "Error sending email.", 
                 500, 
-                null, 
+                { resultData: req.formData }, 
                 "Email not sent successfully."
                 );
         }

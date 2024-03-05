@@ -1,7 +1,7 @@
-import {visitorFormSendMailToUser, visitorFormSendMailToMarketing} from '../common/sendMail'
+import {exhibitorFinalFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
 
-export async function visitorFormSubmit(req: any, res: any) {
+export async function exhibitorFinalFormSubmit(req: any, res: any) {
     const mandatoryFields = [
         req.email
     ]
@@ -16,11 +16,10 @@ export async function visitorFormSubmit(req: any, res: any) {
     }
 
     try {
-        const sendMailToMarketing = await visitorFormSendMailToMarketing(req)
-        const sendMailToUser = await visitorFormSendMailToUser(req)
+        const sendMailToMarketing = await exhibitorFinalFormSendMailToMarketing(req)
 
          // Check if the email was sent successfully
-         if (sendMailToMarketing && sendMailToUser) {
+         if (sendMailToMarketing) {
             // Return a success response
             return createResponse(
                 "Email sent successfully.", 

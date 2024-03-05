@@ -3,7 +3,8 @@ healthc,
 WITAFormSubmit,
 conferenceFormSubmit,
 exhibitorFormSubmit,
-visitorFormSubmit
+visitorFormSubmit,
+exhibitorFinalFormSubmit
 }
   from './functions/index'
 import { createResponse } from './common/util'
@@ -66,5 +67,17 @@ export async function visitorFormSubmit_func(req: any, res: any) {
 
   const payload = req.body
   const result = await visitorFormSubmit(payload, res)
+  return res.status(200).send(result)
+}
+
+export async function exhibitorFinalFormSubmit_func(req: any, res: any) {
+  //validate request
+  if (!req) {
+    const badReq = returnBadRequest()
+    return res.status(badReq.StatusCode).json(badReq)
+  }
+
+  const payload = req.body
+  const result = await exhibitorFinalFormSubmit(payload, res)
   return res.status(200).send(result)
 }

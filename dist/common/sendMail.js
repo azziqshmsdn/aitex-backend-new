@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.visitorFormSendMailToUser = exports.visitorFormSendMailToMarketing = exports.exhibitorFormSendMailToUser = exports.exhibitorFormSendMailToMarketing = exports.conferenceFormSendMailToUser = exports.conferenceFormSendMailToMarketing = exports.WITAFormSendMailToUser = exports.WITAFormSendMailToMarketing = void 0;
+exports.exhibitorFinalFormSendMailToMarketing = exports.visitorFormSendMailToUser = exports.visitorFormSendMailToMarketing = exports.exhibitorFormSendMailToUser = exports.exhibitorFormSendMailToMarketing = exports.conferenceFormSendMailToUser = exports.conferenceFormSendMailToMarketing = exports.WITAFormSendMailToUser = exports.WITAFormSendMailToMarketing = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 function convertJsonToTable(formData) {
     let tableHtml = '<table border="1"><tr><th>Field</th><th>Value</th></tr>';
@@ -197,7 +197,7 @@ function exhibitorFormSendMailToUser(req) {
                     pass: process.env.SENDMAILTOUSER_PASS,
                 },
             });
-            const textMessage = "Dear " + req.formData.nomineeName + "\n\n" + "Thank you for expressing interest in exhibiting at the Asia Islamic Tourism & Trade (AITEX 2024) event. We appreciate your enthusiasm and look forward to the possibility of collaborating with you to make this event a success." +
+            const textMessage = "Dear " + req.formData.firstName + " " + req.formData.lastName + "\n\n" + "Thank you for expressing interest in exhibiting at the Asia Islamic Tourism & Trade (AITEX 2024) event. We appreciate your enthusiasm and look forward to the possibility of collaborating with you to make this event a success." +
                 "We appreciate your enthusiasm and look forward to the possibility of collaborating with you to make this event a success.\n\n" +
                 "Your inquiry has been received, and our sales team is eager to assist you further. They will review your request and get in touch with you as soon as possible to discuss the available exhibition opportunities, stand options, and any additional information you may need to participate effectively in AITEX 2024.\n\n" +
                 "In the meantime, if you have any urgent questions or specific requirements, please feel free to contact us at marketing@aitex.my. We are here to ensure a smooth and rewarding experience for all exhibitors.\n\n" +
@@ -265,13 +265,13 @@ function visitorFormSendMailToUser(req) {
             });
             let subject = "";
             let textMessage = "";
-            if (req.formData.registrationType == "TradeBuyer's") {
+            if (req.formData.registrationType == "Trade Buyer") {
                 subject = "Auto-Reply: Asia Islamic Tourism & Trade (AITEX 2024) Trade Visitor Registration";
             }
             else {
                 subject = "Auto-Reply: Asia Islamic Tourism & Trade (AITEX 2024) Visitor Registration";
             }
-            if (req.formData.registrationType == "TradeBuyer's") {
+            if (req.formData.registrationType == "Trade Buyer") {
                 textMessage = "Dear " + req.formData.firstName + " " + req.formData.lastName + "\n\n" + "Thank you for registering as a trade visitor for the Asia Islamic Tourism & Trade (AITEX 2024) event. " +
                     "Your interest in participating is greatly appreciated.\n\n" +
                     "Please note that your registration has been received, and we are processing it accordingly. Our team is diligently working to ensure that your participation in AITEX 2024 is seamless and productive.\n\n" +
@@ -304,4 +304,34 @@ function visitorFormSendMailToUser(req) {
     });
 }
 exports.visitorFormSendMailToUser = visitorFormSendMailToUser;
+function exhibitorFinalFormSendMailToMarketing(req) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const transporter = nodemailer_1.default.createTransport({
+                pool: true,
+                host: process.env.SENDMAILTOMARKETING_HOST,
+                port: 465,
+                secure: true, // use TLS
+                auth: {
+                    user: process.env.SENDMAILTOMARKETING_USER,
+                    pass: process.env.SENDMAILTOMARKETING_PASS,
+                },
+            });
+            const mailOptions = {
+                from: process.env.SENDMAILTOMARKETING_USER,
+                to: process.env.MARKETING_EMAIL,
+                subject: 'AITEX Exhibitor Final Form Submission',
+                html: convertJsonToTable(req.formData),
+            };
+            // Send the email
+            const sendMail = yield transporter.sendMail(mailOptions);
+            return sendMail;
+        }
+        catch (error) {
+            console.log('error in exhibitorFinalFormSendMailToMarketing function.');
+            return null;
+        }
+    });
+}
+exports.exhibitorFinalFormSendMailToMarketing = exhibitorFinalFormSendMailToMarketing;
 //# sourceMappingURL=sendMail.js.map
