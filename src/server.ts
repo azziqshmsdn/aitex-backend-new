@@ -17,11 +17,12 @@ app.use(Express.json())
 // Routes
 Routes(app)
 
+app.listen()
 // App listen
-app.listen(PORT, HOST, () => {
-  console.log(
-    `Server listening on ${HOST}:${PORT}`
-  )
-})
+// app.listen(PORT, HOST, () => {
+//   console.log(
+//     `Server listening on ${HOST}:${PORT}`
+//   )
+// })
 
 export default app
