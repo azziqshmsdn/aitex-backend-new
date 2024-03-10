@@ -4,6 +4,7 @@ dotenv.config()
 
 import Express from 'express'
 import Routes from './routes'
+import cors from 'cors';
 
 
 // Port, Host config
@@ -13,6 +14,10 @@ const HOST = process.env.HOST || '0.0.0.0'
 // Express server
 const app = Express()
 app.use(Express.json())
+
+app.use(cors({
+    origin: "*"
+}));
 
 // Routes
 Routes(app)
