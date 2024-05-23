@@ -8,8 +8,8 @@ import cors from 'cors';
 
 
 // Port, Host config
-// const PORT = Number(process.env.PORT) || 3000
-// const HOST = process.env.HOST || '0.0.0.0'
+const PORT = Number(process.env.PORT) || 4000
+const HOST = process.env.HOST || '0.0.0.0'
 
 // Express server
 const app = Express()
@@ -22,12 +22,12 @@ app.use(cors({
 // Routes
 Routes(app)
 
-app.listen()
+// app.listen()
 // App listen
-// app.listen(PORT, HOST, () => {
-//   console.log(
-//     `Server listening on ${HOST}:${PORT}`
-//   )
-// })
+app.listen(PORT, HOST, () => {
+  console.log(
+    `Server listening on ${HOST}:${PORT}`
+  )
+})
 
 export default app
