@@ -1,5 +1,6 @@
 import {conferenceFormSendMailToUser, conferenceFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
+import {insertDataToConference} from '../common/insertDb'
 
 export async function conferenceFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -18,6 +19,8 @@ export async function conferenceFormSubmit(req: any, res: any) {
     try {
         const sendMailToMarketing = await conferenceFormSendMailToMarketing(req)
         const sendMailToUser = await conferenceFormSendMailToUser(req)
+        const sendDataToDB = await insertDataToConference(req.formData);
+        console.log("Data to DB:", sendDataToDB);
 
          // Check if the email was sent successfully
          if (sendMailToMarketing && sendMailToUser) {

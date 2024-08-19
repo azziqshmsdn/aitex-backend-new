@@ -1,5 +1,6 @@
 import {exhibitorFormSendMailToUser, exhibitorFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
+import {insertDataToExhibitor} from '../common/insertDb'
 
 export async function exhibitorFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -18,6 +19,8 @@ export async function exhibitorFormSubmit(req: any, res: any) {
     try {
         const sendMailToMarketing = await exhibitorFormSendMailToMarketing(req)
         const sendMailToUser = await exhibitorFormSendMailToUser(req)
+        const sendDataToDB = await insertDataToExhibitor(req.formData);
+        console.log("Data to DB:", sendDataToDB);
 
          // Check if the email was sent successfully
          if (sendMailToMarketing && sendMailToUser) {

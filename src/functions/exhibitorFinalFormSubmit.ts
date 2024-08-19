@@ -1,5 +1,6 @@
 import {exhibitorFinalFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
+import {insertDataToExhibitorContract} from '../common/insertDb'
 
 export async function exhibitorFinalFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -17,6 +18,8 @@ export async function exhibitorFinalFormSubmit(req: any, res: any) {
 
     try {
         const sendMailToMarketing = await exhibitorFinalFormSendMailToMarketing(req)
+        const sendDataToDB = await insertDataToExhibitorContract(req.formData);
+        console.log("Data to DB:", sendDataToDB);
 
          // Check if the email was sent successfully
          if (sendMailToMarketing) {

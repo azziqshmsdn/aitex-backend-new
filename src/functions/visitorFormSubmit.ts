@@ -1,5 +1,6 @@
 import {visitorFormSendMailToUser, visitorFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
+import {insertDataToVisitor} from '../common/insertDb'
 
 export async function visitorFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -16,8 +17,10 @@ export async function visitorFormSubmit(req: any, res: any) {
     }
 
     try {
-        const sendMailToMarketing = await visitorFormSendMailToMarketing(req)
-        const sendMailToUser = await visitorFormSendMailToUser(req)
+        const sendMailToMarketing = await visitorFormSendMailToMarketing(req);
+        const sendMailToUser = await visitorFormSendMailToUser(req);
+        const sendDataToDB = await insertDataToVisitor(req.formData);
+        console.log("Data to DB:", sendDataToDB);
 
          // Check if the email was sent successfully
          if (sendMailToMarketing && sendMailToUser) {

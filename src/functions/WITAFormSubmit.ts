@@ -1,5 +1,6 @@
 import {WITAFormSendMailToUser, WITAFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
+import {insertDataToWITA} from '../common/insertDb'
 
 export async function WITAFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -18,6 +19,8 @@ export async function WITAFormSubmit(req: any, res: any) {
     try {
         const sendMailToMarketing = await WITAFormSendMailToMarketing(req)
         const sendMailToUser = await WITAFormSendMailToUser(req)
+        const sendDataToDB = await insertDataToWITA(req.formData);
+        console.log("Data to DB:", sendDataToDB);
 
          // Check if the email was sent successfully
          if (sendMailToMarketing && sendMailToUser) {
