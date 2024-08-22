@@ -1,6 +1,7 @@
 import {exhibitorFinalFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
 import {insertDataToExhibitorContract} from '../common/insertDb'
+import {updateExhibitorFinalGoogleSheet} from '../common/updateGoogleSheets'
 
 export async function exhibitorFinalFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -18,6 +19,8 @@ export async function exhibitorFinalFormSubmit(req: any, res: any) {
 
     try {
         const sendMailToMarketing = await exhibitorFinalFormSendMailToMarketing(req)
+        const sendToGSheet = await updateExhibitorFinalGoogleSheet(req.formData)
+        console.log("Data to sheet:", sendToGSheet);
         const sendDataToDB = await insertDataToExhibitorContract(req.formData);
         console.log("Data to DB:", sendDataToDB);
 

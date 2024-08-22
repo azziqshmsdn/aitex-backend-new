@@ -20,7 +20,7 @@ export async function visitorFormSubmit(req: any, res: any) {
     try {
         const sendMailToMarketing = await visitorFormSendMailToMarketing(req);
         const sendMailToUser = await visitorFormSendMailToUser(req);
-        const sendToGSheet = await updateVisitorGoogleSheet(req)
+        const sendToGSheet = await updateVisitorGoogleSheet(req.formData)
         console.log("Data to sheet:", sendToGSheet);
         const sendDataToDB = await insertDataToVisitor(req.formData);
         console.log("Data to DB:", sendDataToDB);
