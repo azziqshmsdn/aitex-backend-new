@@ -6,7 +6,7 @@ const secretKey = process.env.SECRET_KEY || 'KLSAG7I3pUkOB2Zy';
 
 // Encrypt the file
 function encryptFile(data: string): string {
-    return CryptoJS.AES.encrypt(data, secretKey).toString();
+    return CryptoJS.AES.encrypt(JSON.stringify({ data }), secretKey).toString();
 }
 
 // Paths to your files

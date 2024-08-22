@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import * as CryptoJS from 'crypto-js';
 import * as fs from 'fs';
 
-const secretKey = process.env.SECRET_KEY || 'your-32-character-random-secret-key';
+const secretKey :any = process.env.SECRET_KEY;
 
 // Function to decrypt the encrypted file
 function decryptFile(ciphertext: string): string {
@@ -21,9 +21,10 @@ const decryptedData = decryptFile(encryptedData);
 
 // Parse the decrypted JSON
 const credentials = JSON.parse(decryptedData);
+const credentialsJSON = JSON.parse(credentials.data);
 
 const auth = new google.auth.GoogleAuth({
-  credentials: credentials,
+  credentials: credentialsJSON,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
