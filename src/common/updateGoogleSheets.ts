@@ -8,7 +8,7 @@ import path from 'path';
 // const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 
 const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json",
+    keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
