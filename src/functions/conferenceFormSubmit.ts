@@ -1,6 +1,7 @@
 import {conferenceFormSendMailToUser, conferenceFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
 import {insertDataToConference} from '../common/insertDb'
+import {updateConferenceGoogleSheet} from '../common/updateGoogleSheets'
 
 export async function conferenceFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -18,7 +19,9 @@ export async function conferenceFormSubmit(req: any, res: any) {
 
     try {
         const sendMailToMarketing = await conferenceFormSendMailToMarketing(req)
-        const sendMailToUser = await conferenceFormSendMailToUser(req)
+        const sendMailToUser = await conferenceFormSendMailToUser(req);
+        const sendToGSheet = await updateConferenceGoogleSheet(req.formData)
+        console.log("Data to sheet:", sendToGSheet);
         const sendDataToDB = await insertDataToConference(req.formData);
         console.log("Data to DB:", sendDataToDB);
 

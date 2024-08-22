@@ -1,6 +1,7 @@
 import {visitorFormSendMailToUser, visitorFormSendMailToMarketing} from '../common/sendMail'
 import {createResponse} from '../common/util'
 import {insertDataToVisitor} from '../common/insertDb'
+import {updateVisitorGoogleSheet} from '../common/updateGoogleSheets'
 
 export async function visitorFormSubmit(req: any, res: any) {
     const mandatoryFields = [
@@ -19,6 +20,8 @@ export async function visitorFormSubmit(req: any, res: any) {
     try {
         const sendMailToMarketing = await visitorFormSendMailToMarketing(req);
         const sendMailToUser = await visitorFormSendMailToUser(req);
+        const sendToGSheet = await updateVisitorGoogleSheet(req.formData)
+        console.log("Data to sheet:", sendToGSheet);
         const sendDataToDB = await insertDataToVisitor(req.formData);
         console.log("Data to DB:", sendDataToDB);
 
